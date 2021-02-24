@@ -1,0 +1,30 @@
+{% extends 'main/main.html' %}
+{% comment %} use extends to inherit from an html page {% endcomment %}
+
+{% comment %} the div below will replace the "root" block in main.html {% endcomment %}
+{% block root %}
+<br>
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<h5>Products</h5>
+				</div>
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+							<th>Product</th>
+							<th>Category</th>
+							<th>Price</th>
+						</tr>
+						<tr>
+							{% for product  in products  %}
+								<td> {{product.name}} </td>
+								<td> {{product.price}} </td>
+								<td> {{product.category}}	</td>							
+							{% endfor %} 
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+{% endblock %}
