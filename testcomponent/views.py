@@ -10,7 +10,7 @@ from.models import *
 def home(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
-    context = {"orders": orders, "customers": customers}
+    context = {'orders': orders, 'customers': customers}
 
     return render(request, 'home/home.html', context)
 
