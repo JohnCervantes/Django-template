@@ -7,7 +7,8 @@ from.models import *
 
 
 # relative path of template is from templates *don't include templates in path*
-def home(request):
+def home(request) -> render:
+    """ Fetch some data that are relevant to home page"""
     customers = Customer.objects.all()
     orders = Order.objects.all()
     context = {'orders': orders, 'customers': customers}
@@ -15,19 +16,22 @@ def home(request):
     return render(request, 'home/home.html', context)
 
 
-def products(request):
+def products(request) -> render:
+    """ Fetch some data that are relevant to product page"""
     products = Product.objects.all()
     return render(request, 'products/products.html', {'products': products})
 
 
-def customer(request, id):
+def customer(request, id) -> render:
+    """ Fetch some data that are relevant to customer page"""
     customer = Customer.objects.get(id=id)
     context = {'customer': customer}
     return render(request, 'customer/customer.html', context)
 
 
 # CRUD FUNCTIONALITY
-def create_order(request):
+def create_order(request) -> render:
+    """ Create an order using a form"""
     form = OrderForm()
     context = {'form': form}
     if request.method == 'POST':
@@ -40,7 +44,8 @@ def create_order(request):
     return render(request, 'Order/order.html', context)
 
 
-def update_order(request, id):
+def update_order(request, id) -> render:
+    """ Update an order using a form"""
     order = Order.objects.get(id=id)
     form = OrderForm(instance=order)
     context = {'form': form}
@@ -53,7 +58,8 @@ def update_order(request, id):
     return render(request, 'Order/order.html', context)
 
 
-def delete_order(request, id):
+def delete_order(request, id) -> render:
+    """Delete an order using a form"""
     order = Order.objects.get(id=id)
     if request.method == 'POST':
         order.delete()
@@ -64,4 +70,5 @@ def delete_order(request, id):
 
 
 def contact(request):
-    return HttpResponse('about')
+    """Send a httpresponse when on /contact"""
+    return HttpResponse('contact')

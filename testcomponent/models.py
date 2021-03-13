@@ -4,17 +4,20 @@ from django.db import models
 
 
 class Customer(models.Model):
+    """ Customer Model """
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     # profile_pic = models.ImageField(null=True, blank=True)
     email = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """ Name of object"""
         return self.name
 
 
 class Tag(models.Model):
+    """ Tag models """
     TAGS = (
         ('Sports', 'Sports'),
         ('Summer', 'Summer'),
@@ -22,11 +25,12 @@ class Tag(models.Model):
     )
     name = models.CharField(max_length=200, null=True, choices=TAGS)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
 class Product(models.Model):
+    """ Product model """
     CATEGORY = (
         ('Indoor', 'Indoor'),
         ('Out Door', 'Out Door'),
@@ -38,11 +42,12 @@ class Product(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     tag = models.ManyToManyField(Tag)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
 class Order(models.Model):
+    """ Order model """
     STATUS = (
         ('Pending', 'Pending'),
         ('Out for delivery', 'Out for delivery'),
@@ -55,5 +60,5 @@ class Order(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.customer.name
